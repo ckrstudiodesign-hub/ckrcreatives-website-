@@ -75,7 +75,12 @@ export default function Contact() {
       }
     } catch (error) {
       console.error('Submission Error:', error);
-      setFormMessage('Network blocked the transmission. Please try disabling adblockers or check your connection.');
+      
+      // Enterprise fallback: if adblockers kill the API, open email client directly
+      const body = `Name: ${formData.name}\nEmail: ${formData.email}\n\nObjective:\n${formData.objective}`;
+      window.location.href = `mailto:ckrstudiodesign@gmail.com?subject=${encodeURIComponent(`New Collaboration Request from ${formData.name}`)}&body=${encodeURIComponent(body)}`;
+      
+      setFormMessage('API blocked by browser. Redirecting to your secure email client...');
     } finally {
       setIsSubmitting(false);
     }
