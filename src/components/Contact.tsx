@@ -52,20 +52,17 @@ export default function Contact() {
     setFormMessage('Transmitting securely...');
 
     try {
+      const submissionData = new FormData();
+      submissionData.append('access_key', '1e5585e5-f8f8-4d9b-9b0f-b7e1b27cd459');
+      submissionData.append('name', formData.name);
+      submissionData.append('email', formData.email);
+      submissionData.append('objective', formData.objective);
+      submissionData.append('subject', `New Collaboration Request from ${formData.name}`);
+      submissionData.append('from_name', 'CKR Creatives Website');
+
       const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify({
-          access_key: '1e5585e5-f8f8-4d9b-9b0f-b7e1b27cd459',
-          name: formData.name,
-          email: formData.email,
-          objective: formData.objective,
-          subject: `New Collaboration Request from ${formData.name}`,
-          from_name: 'CKR Creatives Website',
-        }),
+        body: submissionData
       });
 
       const result = await response.json();
@@ -77,7 +74,8 @@ export default function Contact() {
         setFormMessage(result.message || 'Transmission failed. Please try again later.');
       }
     } catch (error) {
-      setFormMessage('An error occurred during transmission. Please try again.');
+      console.error('Submission Error:', error);
+      setFormMessage('Network blocked the transmission. Please try disabling adblockers or check your connection.');
     } finally {
       setIsSubmitting(false);
     }

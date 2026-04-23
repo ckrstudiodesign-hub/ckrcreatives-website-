@@ -57,7 +57,7 @@ export default function App() {
   const scrollBackgroundOpacity = useTransform(smoothProgress, [0, 0.08, 0.5, 0.9, 1], [0, 0.34, 0.52, 0.22, 0]);
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 1200);
+    const timer = setTimeout(() => setIsLoading(false), 1800);
     
     const handleMouseMove = (e: MouseEvent) => {
       mouseX.set(e.clientX);
@@ -170,15 +170,15 @@ export default function App() {
         {isLoading && (
           <motion.div
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
+            transition={{ duration: 1.4, ease: [0.76, 0, 0.24, 1] }}
             className="fixed inset-0 z-[100] bg-white flex items-center justify-center overflow-hidden"
           >
             <motion.div
               initial={{ scale: 0.4, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 60, opacity: 0 }}
-              transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
-              className="text-4xl font-display font-bold tracking-tighter origin-center"
+              transition={{ duration: 1.4, ease: [0.76, 0, 0.24, 1] }}
+              className="text-4xl font-display font-bold tracking-tighter origin-center transform-gpu will-change-transform"
             >
               CKR<span className="text-brand-orange">.</span>
             </motion.div>
@@ -192,7 +192,7 @@ export default function App() {
           style={{ x: smoothMouseX, y: smoothMouseY, marginLeft: -12, marginTop: -12 }}
           className="hidden md:flex fixed w-6 h-6 text-brand-orange pointer-events-none z-[99] items-center justify-center drop-shadow-md"
         >
-          <Fish className="w-full h-full fill-brand-orange -rotate-45" />
+          <Fish className="w-full h-full fill-brand-orange -scale-x-100 -rotate-45" />
         </motion.div>
         
         <Navbar activePage={activePage} onNavigate={handleNavigate} />
