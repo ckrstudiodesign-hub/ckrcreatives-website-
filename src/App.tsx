@@ -170,13 +170,15 @@ export default function App() {
         {isLoading && (
           <motion.div
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] bg-white flex items-center justify-center"
+            transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
+            className="fixed inset-0 z-[100] bg-white flex items-center justify-center overflow-hidden"
           >
             <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
+              initial={{ scale: 0.4, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.5 }}
-              className="text-4xl font-display font-bold tracking-tighter"
+              exit={{ scale: 60, opacity: 0 }}
+              transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
+              className="text-4xl font-display font-bold tracking-tighter origin-center"
             >
               CKR<span className="text-brand-orange">.</span>
             </motion.div>
