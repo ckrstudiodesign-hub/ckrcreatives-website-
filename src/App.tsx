@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform, useMotionTemplate, useSpring, useMotionValue } from 'motion/react';
+import { Fish } from 'lucide-react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import TrustLogos from './components/TrustLogos';
@@ -186,9 +187,11 @@ export default function App() {
       <div className="min-h-screen selection:bg-brand-orange selection:text-white overflow-x-hidden cursor-none md:cursor-auto flex flex-col">
         {/* Custom Cursor for Desktop */}
         <motion.div 
-          style={{ x: smoothMouseX, y: smoothMouseY, marginLeft: -16, marginTop: -16 }}
-          className="hidden md:block fixed w-8 h-8 rounded-full border border-orange-500/30 pointer-events-none z-[99]"
-        />
+          style={{ x: smoothMouseX, y: smoothMouseY, marginLeft: -12, marginTop: -12 }}
+          className="hidden md:flex fixed w-6 h-6 text-brand-orange pointer-events-none z-[99] items-center justify-center drop-shadow-md"
+        >
+          <Fish className="w-full h-full fill-brand-orange -rotate-45" />
+        </motion.div>
         
         <Navbar activePage={activePage} onNavigate={handleNavigate} />
         

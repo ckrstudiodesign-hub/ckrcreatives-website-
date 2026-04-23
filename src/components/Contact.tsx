@@ -70,7 +70,7 @@ export default function Contact() {
 
       const result = await response.json();
       if (result.success) {
-        setFormMessage('Transmission successful. We will be in touch shortly.');
+        setFormMessage('Form submitted successfully! We will be in touch shortly.');
         setLastSubmitTime(now);
         setFormData({ name: '', email: '', objective: '', website: '' }); // Clear form
       } else {
@@ -140,12 +140,17 @@ export default function Contact() {
 
             <div className="mt-8 md:mt-10 flex flex-col sm:flex-row items-center sm:items-start gap-5 sm:gap-6">
               <div className="flex -space-x-4">
-                {[1,2,3,4].map(i => (
+                {[
+                  'https://randomuser.me/api/portraits/men/32.jpg',
+                  'https://randomuser.me/api/portraits/women/44.jpg',
+                  'https://randomuser.me/api/portraits/men/68.jpg',
+                  'https://randomuser.me/api/portraits/women/63.jpg'
+                ].map((src, i) => (
                   <img 
                     key={i}
-                    src={`https://picsum.photos/seed/face${i}/100/100`}
+                    src={src}
                     className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border-4 border-white object-cover shadow-lg"
-                    alt="Team Avatar"
+                    alt={`Team member ${i + 1}`}
                     loading="lazy"
                     decoding="async"
                     referrerPolicy="no-referrer"
