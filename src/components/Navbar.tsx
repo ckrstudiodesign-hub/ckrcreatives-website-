@@ -19,6 +19,7 @@ export default function Navbar({ activePage, onNavigate }: NavbarProps) {
   }, []);
 
   const navLinks = [
+    { name: 'Home', id: 'home' },
     { name: 'Services', id: 'services' },
     { name: 'Work', id: 'work' },
     { name: 'About', id: 'about' },

@@ -144,10 +144,10 @@ export default function Contact() {
             <div className="mt-8 md:mt-10 flex flex-col sm:flex-row items-center sm:items-start gap-5 sm:gap-6">
               <div className="flex -space-x-4">
                 {[
-                  'https://randomuser.me/api/portraits/men/32.jpg',
-                  'https://randomuser.me/api/portraits/women/44.jpg',
-                  'https://randomuser.me/api/portraits/men/68.jpg',
-                  'https://randomuser.me/api/portraits/women/63.jpg'
+                  'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=faces',
+                  'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop&crop=faces',
+                  'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&h=150&fit=crop&crop=faces',
+                  'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop&crop=faces'
                 ].map((src, i) => (
                   <img 
                     key={i}
