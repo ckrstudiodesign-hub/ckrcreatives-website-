@@ -7,11 +7,8 @@ export default function BackToTop() {
 
   useEffect(() => {
     const toggleVisibility = () => {
-      const scrollHeight = document.documentElement.scrollHeight;
-      const scrollPos = window.innerHeight + window.scrollY;
-      
-      // Threshold: 100px from the bottom
-      if (scrollPos > scrollHeight - 100) {
+      // Show button if page is scrolled more than the height of the viewport
+      if (window.scrollY > window.innerHeight) {
         setIsVisible(true);
       } else {
         setIsVisible(false);

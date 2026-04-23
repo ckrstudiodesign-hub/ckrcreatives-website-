@@ -7,10 +7,11 @@ export default function Contact() {
     name: '',
     email: '',
     objective: '',
-    website: ''
+    website: '' // Honeypot field
   });
   const [lastSubmitTime, setLastSubmitTime] = useState(0);
   const [formMessage, setFormMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const sanitizeInput = (value: string) =>
     value
@@ -32,7 +33,7 @@ export default function Contact() {
     return '';
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const now = Date.now();
 
@@ -41,15 +42,45 @@ export default function Contact() {
       return;
     }
 
-    const error = validateForm();
-    if (error) {
-      setFormMessage(error);
+    const validationError = validateForm();
+    if (validationError) {
+      setFormMessage(validationError);
       return;
     }
 
-    setLastSubmitTime(now);
-    setFormMessage('Message secured and queued. We will contact you shortly.');
-    setFormData({ name: '', email: '', objective: '', website: '' });
+    setIsSubmitting(true);
+    setFormMessage('Transmitting securely...');
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          access_key: '1e5585e5-f8f8-4d9b-9b0f-b7e1b27cd459',
+          name: formData.name,
+          email: formData.email,
+          objective: formData.objective,
+          subject: `New Collaboration Request from ${formData.name}`,
+          from_name: 'CKR Creatives Website',
+        }),
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        setFormMessage('Transmission successful. We will be in touch shortly.');
+        setLastSubmitTime(now);
+        setFormData({ name: '', email: '', objective: '', website: '' }); // Clear form
+      } else {
+        setFormMessage(result.message || 'Transmission failed. Please try again later.');
+      }
+    } catch (error) {
+      setFormMessage('An error occurred during transmission. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -192,9 +223,9 @@ export default function Contact() {
                 </p>
               )}
 
-              <button type="submit" className="group relative w-full overflow-hidden bg-black text-white py-5 sm:py-6 rounded-2xl font-black text-[13px] uppercase tracking-[0.2em] transition-all duration-500 active:scale-95 cursor-pointer shadow-lg">
+              <button type="submit" disabled={isSubmitting} className="group relative w-full overflow-hidden bg-black text-white py-5 sm:py-6 rounded-2xl font-black text-[13px] uppercase tracking-[0.2em] transition-all duration-500 active:scale-95 cursor-pointer shadow-lg disabled:opacity-70 disabled:cursor-not-allowed">
                 <span className="relative z-10 flex items-center justify-center gap-3">
-                  Initialize Transmission <Send className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                  {isSubmitting ? 'Transmitting...' : 'Initialize Transmission'} <Send className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
                 </span>
                 <span className="absolute inset-0 bg-brand-orange opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
               </button>

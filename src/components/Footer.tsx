@@ -4,10 +4,7 @@ interface FooterProps {
 
 export default function Footer({ onNavigate }: FooterProps) {
   const handleNav = (id: string) => {
-    if (onNavigate) {
-      onNavigate(id);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+    onNavigate?.(id);
   };
 
   return (
