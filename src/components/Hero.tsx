@@ -62,7 +62,7 @@ export default function Hero({ onNavigate }: HeroProps) {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
             <span className="inline-flex items-center gap-2 px-4 py-1.5 mb-10 text-[11px] font-black uppercase tracking-[0.2em] text-brand-orange bg-orange-50/50 backdrop-blur-xl border border-brand-orange/10 rounded-full">
-              <Sparkles className="w-3 h-3" /> Now Scaling High-Growth Brands
+              <Sparkles className="w-3 h-3" /> Dubai Creative Growth Partner
             </span>
           </motion.div>
           
@@ -93,7 +93,7 @@ export default function Hero({ onNavigate }: HeroProps) {
             className="flex flex-col items-center"
           >
             <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto mb-14 leading-relaxed font-medium tracking-tight">
-              We bridge the gap between <span className="text-slate-900 border-b border-brand-orange/30">world-class aesthetics</span> and <span className="text-slate-900 border-b border-brand-orange/30">revenue-first engineering</span>.
+              CKR Creatives helps ambitious brands in Dubai scale with high-performance web experiences, strategic growth systems, and conversion-focused execution.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6">

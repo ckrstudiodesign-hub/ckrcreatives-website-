@@ -12,79 +12,45 @@ import {
 const services = [
   {
     title: 'Web Design & Development',
-    description: 'High-performance websites and apps built with React/Next.js for ultimate speed and conversion.',
+    description: 'Conversion-focused websites, funnels, and premium digital experiences built for speed, clarity, and scalable growth.',
     icon: Globe,
+    linkLabel: 'Explore Web Design',
+    linkHref: '#'
   },
   {
-    title: 'Growth & SEO',
-    description: 'Multi-channel search dominance through SEO, AEO, and specialized GEO strategies.',
+    title: 'SEO, GEO & AEO',
+    description: 'Search and AI visibility strategies that improve discoverability, authority, and qualified inbound opportunities.',
     icon: Search,
+    linkLabel: 'Explore SEO & GEO',
+    linkHref: '#'
+  },
+  {
+    title: 'Social Media Marketing',
+    description: 'Campaign systems for social growth, paid performance, and creative optimization across key attention channels.',
+    icon: BarChart3,
+    linkLabel: 'Explore Social Growth',
+    linkHref: '#'
   },
   {
     title: 'AI Automation',
-    description: 'Scale your operations with custom LLM integrations and workflow optimizations.',
+    description: 'Automation workflows that remove bottlenecks, accelerate response times, and improve operational consistency.',
     icon: Cpu,
+    linkLabel: 'Explore Automation',
+    linkHref: '#'
   },
   {
-    title: 'Branding & Content',
-    description: 'Premium visual identities and strategic content that resonates with your target audience.',
+    title: 'Video Production & Branding',
+    description: 'Brand storytelling through premium video, campaign visuals, and content systems that elevate market positioning.',
     icon: Palette,
+    linkLabel: 'Explore Branding',
+    linkHref: '#'
   },
   {
     title: 'Cybersecurity',
-    description: 'Protecting your digital assets with enterprise-grade security solutions and IT infrastructure.',
+    description: 'Practical digital protection systems that secure web assets, reduce risk, and protect brand trust as you scale.',
     icon: ShieldCheck,
-  },
-  {
-    title: 'Analytics & Optimization',
-    description: 'Data-driven insights and continuous optimization to ensure your growth engine never stops.',
-    icon: BarChart3,
-  }
-];
-
-const optimizationFramework = [
-  {
-    title: 'SEO (Search Engine Optimization)',
-    detail: 'SEO ranks your website in traditional search engine link lists.'
-  },
-  {
-    title: 'GEO (Generative Engine Optimization)',
-    detail: 'GEO gets your brand cited and summarized within AI-generated responses.'
-  },
-  {
-    title: 'AEO (Answer Engine Optimization)',
-    detail: 'AEO optimizes content to become the definitive answer for voice and direct queries.'
-  },
-  {
-    title: 'AIO (AI Optimization)',
-    detail: 'AIO prepares digital assets to be understood by artificial intelligence systems.'
-  },
-  {
-    title: 'ASO (App Store Optimization)',
-    detail: 'ASO improves visibility and ranking of mobile applications within app stores.'
-  },
-  {
-    title: 'SXO (Search Experience Optimization)',
-    detail: 'SXO blends SEO with user experience to maximize engagement and conversion quality.'
-  },
-  {
-    title: 'LLMO (Large Language Model Optimization)',
-    detail: 'LLMO structures data so AI models can ingest and recall your brand accurately.'
-  }
-];
-
-const faqItems = [
-  {
-    question: 'What does an AI Automation Agency Dubai do for growth brands?',
-    answer: 'An AI Automation Agency Dubai streamlines operations, improves lead qualification, and accelerates execution using AI-first workflows.'
-  },
-  {
-    question: 'Why combine SEO and GEO services in Dubai?',
-    answer: 'SEO drives visibility in classic search results, while GEO increases brand visibility in AI-generated answers and summaries.'
-  },
-  {
-    question: 'How does Web Development Dubai impact conversions?',
-    answer: 'High-performance web development improves speed, clarity, and trust, which directly improves conversion rates and lead quality.'
+    linkLabel: 'Explore Security',
+    linkHref: '#'
   }
 ];
 
@@ -165,9 +131,16 @@ export default function Services() {
                       {service.title}
                     </h3>
                     
-                    <p className="text-slate-500 text-base leading-relaxed mb-10 flex-grow font-medium group-hover:font-bold group-hover:text-slate-700 transition-all duration-300">
+                    <p className="text-slate-500 text-base leading-relaxed mb-6 flex-grow font-medium group-hover:font-bold group-hover:text-slate-700 transition-all duration-300">
                       {service.description}
                     </p>
+
+                    <a
+                      href={service.linkHref}
+                      className="text-sm font-black uppercase tracking-[0.16em] text-brand-orange hover:text-brand-orange-dark transition-colors mb-4"
+                    >
+                      {service.linkLabel}
+                    </a>
 
                     <div className="h-[2px] w-0 bg-brand-orange transition-all duration-500 group-hover:w-full" />
                   </div>
@@ -175,47 +148,6 @@ export default function Services() {
             </motion.article>
           ))}
         </div>
-
-        <section aria-labelledby="ai-optimization-framework" className="mt-16 md:mt-20">
-          <header className="mb-10 md:mb-12">
-            <p className="text-brand-orange font-black tracking-[0.2em] text-[11px] uppercase mb-3">Search + AI Visibility Framework</p>
-            <h2 id="ai-optimization-framework" className="text-3xl md:text-5xl font-display font-black text-slate-900 tracking-tight mb-4">
-              AI Automation Agency Dubai Strategy: SEO & GEO Services Dubai
-            </h2>
-            <p className="text-slate-600 text-base md:text-lg max-w-3xl">
-              We structure brand content for search engines, answer engines, and large language models so your visibility compounds across Google, ChatGPT, Gemini, and voice discovery.
-            </p>
-          </header>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-            {optimizationFramework.map((item) => (
-              <article key={item.title} className="rounded-3xl border border-slate-200 bg-white p-6 md:p-8 shadow-sm">
-                <h3 className="text-lg md:text-xl font-display font-black text-slate-900 mb-3 tracking-tight">{item.title}</h3>
-                <p className="text-slate-600 text-sm md:text-base">{item.detail}</p>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section aria-labelledby="faq-section" className="mt-16 md:mt-20">
-          <header className="mb-8 md:mb-10">
-            <h2 id="faq-section" className="text-3xl md:text-5xl font-display font-black text-slate-900 tracking-tight mb-3">
-              FAQ: Web Development Dubai, SEO, GEO, and LLMO
-            </h2>
-            <p className="text-slate-600 text-base md:text-lg max-w-3xl">
-              Clear answers for decision-makers evaluating growth infrastructure, AI optimization, and technical search performance.
-            </p>
-          </header>
-
-          <div className="space-y-4 md:space-y-6">
-            {faqItems.map((item) => (
-              <article key={item.question} className="rounded-3xl border border-slate-200 bg-white p-6 md:p-8">
-                <h3 className="text-lg md:text-2xl font-display font-black text-slate-900 mb-3">{item.question}</h3>
-                <p className="text-slate-600 text-sm md:text-base">{item.answer}</p>
-              </article>
-            ))}
-          </div>
-        </section>
       </div>
     </section>
   );

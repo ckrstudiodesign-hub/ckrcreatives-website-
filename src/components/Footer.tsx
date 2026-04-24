@@ -8,7 +8,7 @@ export default function Footer({ onNavigate }: FooterProps) {
   };
 
   return (
-    <footer className="py-32 border-t border-black/[0.03] bg-white relative overflow-hidden">
+    <footer id="site-footer" className="py-32 border-t border-black/[0.03] bg-white relative overflow-hidden">
       <div className="container-custom relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-24 mb-32">
           <div className="md:col-span-6">

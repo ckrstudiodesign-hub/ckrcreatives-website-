@@ -2,22 +2,36 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ArrowUp } from 'lucide-react';
 
-export default function BackToTop() {
+interface BackToTopProps {
+  footerSelector?: string;
+}
+
+export default function BackToTop({ footerSelector = '#site-footer' }: BackToTopProps) {
   const [isVisible, setIsVisible] = useState(false);
+  const [isFooterInView, setIsFooterInView] = useState(false);
 
   useEffect(() => {
     const toggleVisibility = () => {
-      // Show button if page is scrolled more than the height of the viewport
-      if (window.scrollY > window.innerHeight) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
+      setIsVisible(window.scrollY > window.innerHeight * 0.4);
     };
 
     window.addEventListener('scroll', toggleVisibility);
+    toggleVisibility();
     return () => window.removeEventListener('scroll', toggleVisibility);
   }, []);
+
+  useEffect(() => {
+    const footer = document.querySelector(footerSelector);
+    if (!footer) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsFooterInView(entry.isIntersecting),
+      { threshold: 0.18 }
+    );
+
+    observer.observe(footer);
+    return () => observer.disconnect();
+  }, [footerSelector]);
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -28,7 +42,7 @@ export default function BackToTop() {
 
   return (
     <AnimatePresence>
-      {isVisible && (
+      {isVisible && isFooterInView && (
         <motion.button
           initial={{ opacity: 0, scale: 0.8, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}

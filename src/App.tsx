@@ -3,8 +3,10 @@ import { motion, AnimatePresence, useScroll, useTransform, useMotionTemplate, us
 import { Fish } from 'lucide-react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import KeywordIntro from './components/KeywordIntro';
 import TrustLogos from './components/TrustLogos';
 import Services from './components/Services';
+import WhyCKR from './components/WhyCKR';
 import Work from './components/Work';
 import About from './components/About';
 import Process from './components/Process';
@@ -13,6 +15,7 @@ import FinalCTA from './components/FinalCTA';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import BackToTop from './components/BackToTop';
+import WhatsAppFloat from './components/WhatsAppFloat';
 
 import PageTransitionOverlay from './components/PageTransitionOverlay';
 
@@ -20,6 +23,8 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [isNavigating, setIsNavigating] = useState(false);
   const [activePage, setActivePage] = useState('home');
+
+  const validPages = new Set(['home', 'services', 'work', 'about', 'contact']);
 
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -58,16 +63,30 @@ export default function App() {
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 1800);
+
+    const hashPage = window.location.hash.replace('#', '').toLowerCase();
+    if (validPages.has(hashPage)) {
+      setActivePage(hashPage);
+    }
+
+    const handleHashChange = () => {
+      const nextHashPage = window.location.hash.replace('#', '').toLowerCase();
+      if (validPages.has(nextHashPage)) {
+        setActivePage(nextHashPage);
+      }
+    };
     
     const handleMouseMove = (e: MouseEvent) => {
       mouseX.set(e.clientX);
       mouseY.set(e.clientY);
     };
     
+    window.addEventListener('hashchange', handleHashChange);
     window.addEventListener('mousemove', handleMouseMove);
     
     return () => {
       clearTimeout(timer);
+      window.removeEventListener('hashchange', handleHashChange);
       window.removeEventListener('mousemove', handleMouseMove);
     };
   }, []);
@@ -80,6 +99,11 @@ export default function App() {
     // Halfway through the 0.6s overlay animation, we switch the content
     setTimeout(() => {
       setActivePage(page);
+      if (page === 'home') {
+        window.history.replaceState(null, '', window.location.pathname + window.location.search);
+      } else {
+        window.history.replaceState(null, '', `#${page}`);
+      }
       window.scrollTo(0, 0);
     }, 400);
 
@@ -98,7 +122,6 @@ export default function App() {
             <TrustLogos />
             <Services />
             <Work onNavigate={handleNavigate} />
-            <About />
             <FinalCTA onNavigate={handleNavigate} />
           </>
         );
@@ -110,6 +133,8 @@ export default function App() {
         return (
           <>
             <About />
+            <KeywordIntro />
+            <WhyCKR />
             <Process />
             <Testimonials />
           </>
@@ -212,7 +237,8 @@ export default function App() {
         </main>
         
         <Footer onNavigate={handleNavigate} />
-        <BackToTop />
+        <BackToTop footerSelector="#site-footer" />
+        <WhatsAppFloat isHidden={activePage === 'contact'} />
       </div>
     </>
   );
